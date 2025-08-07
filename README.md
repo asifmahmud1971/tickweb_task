@@ -1,4 +1,4 @@
-# 📚 ReadBack App
+# 📚 Task App
 
 Welcome to the **ReadBack App**, a dynamic Flutter application that enhances reading experiences with intelligent voice feedback, real-time skill tracking, and multilingual support. Designed for scalability, testability, and modularity, this app uses Flutter’s latest development practices along with advanced tooling and structured state management.
 
