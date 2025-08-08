@@ -102,10 +102,15 @@ lib/
 ```
 📂 Folder Responsibilities
 core/ → Shared utilities, constants, themes, error handling, and base classes.
+
 data/ → Responsible for managing data sources (API, local DB) and repositories.
+
 features/ → Each subfolder represents a self-contained feature module, containing its own UI, state management (Bloc/Cubit), and logic.
+
 generated/ → Contains build-time generated files. Do not edit manually.
+
 main_*.dart → Environment-specific entry points, allowing different configurations for Development, Staging, and Production.
+
 🏗 Architecture Principles
 Feature-based structure: Keeps all related files (UI, state, data) in one place per feature.
 Environment separation: Different main_*.dart files make it easy to switch between environments.
@@ -115,5 +120,3 @@ Layered approach: Clear separation of Core, Data, and Feature layers.
 Experience the app in action:
 📹 https://drive.google.com/file/d/1f3qkuySVNEp7sVBueb4CVshvwl3yflp1/view?usp=sharing
 
-📱 APK screenshot
-📌 screenshot/
