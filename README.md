@@ -63,36 +63,57 @@ Some parts of the app use code generation (e.g., dependency injection, localizat
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 ### 📦 Key Dependencies
-| Package                 | Purpose                         |
-| ----------------------- |---------------------------------|
-| `flutter_bloc`          | State management (BLoC pattern) |
-| `dio`                   | API networking                  |
-| `easy_localization`     | Multi-language support          |
-| `flutter_easyloading`   | Loading overlay UI              |
-| `get_it` + `injectable` | Dependency injection            |
-| `lottie`                | Animations                      |
-| `flutter_screenutil`    | Responsive layout               |
-| `equatable`             | Value comparison in state       |
-| `connectivity_plus`     | Network status detection        |
-| `firebase_core`         | Firebase initialization         |
-| `firebase_auth`         | Authentication                  |
-| `cloud_firestore`       | Firestore database              |
-| `firebase_messaging`    | Push notifications              |
-| `firebase_analytics`    | Analytics tracking              |
+| Package                | Purpose                        |
+| ---------------------- |--------------------------------|
+| `flutter_bloc`         | State management (BLoC pattern) |
+| `dio`                  | API networking                 |
+| `easy_localization`    | Multi-language support         |
+| `flutter_easyloading`  | Loading overlay UI             |
+| `get_it` + `injectable` | Dependency injection           |
+| `lottie`               | Animations                     |
+| `flutter_screenutil`   | Responsive layout              |
+| `equatable`            | Value comparison in state      |
+| `connectivity_plus`    | Network status detection       | 
  -------------------------------------------------------------
-### 📂 Project Structure
+### 🏛 Architecture Overview
+This project follows a feature-first, layered architecture approach to ensure scalability, maintainability, and clear separation of concerns.
 ```plaintext
 lib/
-├── core/                  # Core utilities and constants
-├── features/              # Feature modules
-│   ├── feature_one/       # Example feature module
-│   ├── feature_two/       # Another feature module
-├── main_development.dart  # Entry point for development flavor
-├── main_staging.dart      # Entry point for staging flavor
-├── main_production.dart    # Entry point for production flavor
-├── app.dart               # App configuration and routing
-├── di/                    # Dependency injection setup
-├── localization/          # Localization files
-├── utils/                 # Utility functions and helpers
-└── widgets/               # Reusable widgets
+│
+├── core/                   # Application-wide core functionalities (constants, utils, services)
+│
+├── data/                   # Data layer (API clients, repositories, models)
+│
+├── features/               # Feature-based modules
+│   ├── auth/               # Authentication feature
+│   ├── dashboard/          # Dashboard UI and logic
+│   ├── home/               # Home screen and related logic
+│   ├── lesson/             # Lessons and learning module
+│   ├── no_internet/        # Offline handling UI and logic
+│   ├── profile/            # User profile management
+│   ├── splash/             # Splash screen and initialization
+│   └── theme/              # App theme, colors, and typography
+│
+├── generated/              # Auto-generated files (e.g., localization, build configs)
+│
+├── main_development.dart   # Entry point for Development environment
+├── main_production.dart    # Entry point for Production environment
+└── main_staging.dart       # Entry point for Staging environment
 ```
+📂 Folder Responsibilities
+core/ → Shared utilities, constants, themes, error handling, and base classes.
+data/ → Responsible for managing data sources (API, local DB) and repositories.
+features/ → Each subfolder represents a self-contained feature module, containing its own UI, state management (Bloc/Cubit), and logic.
+generated/ → Contains build-time generated files. Do not edit manually.
+main_*.dart → Environment-specific entry points, allowing different configurations for Development, Staging, and Production.
+🏗 Architecture Principles
+Feature-based structure: Keeps all related files (UI, state, data) in one place per feature.
+Environment separation: Different main_*.dart files make it easy to switch between environments.
+Layered approach: Clear separation of Core, Data, and Feature layers.
+
+📱 APK Demo Video
+Experience the app in action:
+📹 https://drive.google.com/file/d/1f3qkuySVNEp7sVBueb4CVshvwl3yflp1/view?usp=sharing
+
+📱 APK screenshot
+📌 screenshot/
