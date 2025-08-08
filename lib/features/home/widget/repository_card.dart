@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +20,6 @@ class RepositoryCard extends StatefulWidget {
 class _RepositoryCardState extends State<RepositoryCard> {
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         final theme = ThemeColor(state.themeMode);
@@ -30,8 +28,7 @@ class _RepositoryCardState extends State<RepositoryCard> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: theme.cardColor),
+                borderRadius: BorderRadius.circular(8), color: theme.cardColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,22 +37,33 @@ class _RepositoryCardState extends State<RepositoryCard> {
                     Expanded(
                       child: Text(
                         widget.items?.fullName ?? "",
-                        style: kBodyMediumSemibold.copyWith(color: theme.textColor),
+                        style: kBodyMediumSemibold.copyWith(
+                            color: theme.textColor),
                       ),
                     ),
-                    Row(children: [
-                      Icon(Icons.star, color: Colors.black, size: 14.r,),
-                      5.horizontalSpace,
-                      Text(widget.items?.score.toString() ?? "",
-                        style: kBodySmallRegular.copyWith(color: AppColors
-                            .black),),
-
-                    ],)
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.black,
+                          size: 14.r,
+                        ),
+                        5.horizontalSpace,
+                        Text(
+                          widget.items?.score.toString() ?? "",
+                          style: kBodySmallRegular.copyWith(
+                              color: AppColors.black),
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 Text(widget.items?.owner?.login ?? ""),
                 10.verticalSpace,
-                Text(widget.items?.description ?? "", style: kBodySmallRegular,)
+                Text(
+                  widget.items?.description ?? "",
+                  style: kBodySmallRegular,
+                )
               ],
             ),
           ),

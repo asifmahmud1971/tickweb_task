@@ -1,15 +1,15 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:readback/core/constants/app_colors.dart';
+import 'package:intl/intl.dart';
 import 'package:readback/core/constants/app_text_style.dart';
 import 'package:readback/core/constants/theme_color.dart';
 import 'package:readback/features/home/model/repository_list_model.dart';
 import 'package:readback/features/theme/cubit/theme_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
 
 class RepositoryDetailsPage extends StatelessWidget {
   final Items repository;
@@ -91,28 +91,50 @@ class RepositoryDetailsPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
               width: 1.sw,
               decoration: BoxDecoration(
-                  color: theme.cardColor,
-                  borderRadius: BorderRadius.circular(10.r)),
+                color: theme.cardColor,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
                     radius: 30,
                     backgroundImage:
-                    NetworkImage(repository.owner?.avatarUrl ?? ''),
+                        NetworkImage(repository.owner?.avatarUrl ?? ''),
                   ),
+                  5.verticalSpace,
                   Text(repository.name ?? ""),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FaIcon(FontAwesomeIcons.github, size: 16.r,),
-                      10.horizontalSpace,
-                      Text(repository.gitUrl ?? ""),
-                    ],)
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero, // Remove default padding
+                      alignment:
+                          Alignment.center, // Center content horizontally
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min, // Take minimum width
+                      crossAxisAlignment:
+                          CrossAxisAlignment.center, // Center vertically
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.github,
+                          size: 16.r,
+                        ),
+                        SizedBox(width: 8), // Add spacing between icon and text
+                        Flexible(
+                          child: AutoSizeText(
+                            repository.gitUrl ?? "",
+                            textAlign: TextAlign
+                                .center, // Center text within its space
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-
             10.verticalSpace,
             Text(
               repository.description ?? 'No description provided',
@@ -141,13 +163,13 @@ class RepositoryDetailsPage extends StatelessWidget {
         Icon(icon, size: 12.sp),
         label.isNotEmpty
             ? Text(
-          '$label: ${value ?? 'N/A'}',
-          style: kBodyRegularMedium.copyWith(fontSize: 12.sp),
-        )
+                '$label: ${value ?? 'N/A'}',
+                style: kBodyRegularMedium.copyWith(fontSize: 12.sp),
+              )
             : Text(
-          '${value ?? 'N/A'}',
-          style: kBodyRegularMedium.copyWith(fontSize: 12.sp),
-        ),
+                '${value ?? 'N/A'}',
+                style: kBodyRegularMedium.copyWith(fontSize: 12.sp),
+              ),
       ],
     );
   }
@@ -168,11 +190,10 @@ class RepositoryDetailsPage extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: (repository.topics ?? [])
-              .map((topic) =>
-              Chip(
-                label: Text(topic),
-                backgroundColor: Colors.blue[50],
-              ))
+              .map((topic) => Chip(
+                    label: Text(topic),
+                    backgroundColor: Colors.blue[50],
+                  ))
               .toList(),
         ),
       ],

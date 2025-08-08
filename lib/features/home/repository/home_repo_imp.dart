@@ -21,7 +21,6 @@ class HomeRepositoryImp implements HomeRepository {
         url: ApiUrls.repoUrl,
         method: HttpMethod.get,
         params: params,
-        fromJson: RepositoryListModel.fromJson
-    );
+        fromJson: RepositoryListModel.fromJson);
   }
 }

@@ -41,10 +41,10 @@ class HomeState extends Equatable {
 
   @override
   List<Object?> get props => [
-    status,
-    message,
-    hasReachedMax,
-    repositoryListModel,
-    repoList, // No need for null check with default value
-  ];
+        status,
+        message,
+        hasReachedMax,
+        repositoryListModel,
+        repoList, // No need for null check with default value
+      ];
 }

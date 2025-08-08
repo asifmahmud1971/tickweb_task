@@ -1,8 +1,9 @@
 class RepositoryListModel {
   RepositoryListModel({
-      this.totalCount, 
-      this.incompleteResults, 
-      this.items,});
+    this.totalCount,
+    this.incompleteResults,
+    this.items,
+  });
 
   RepositoryListModel.fromJson(dynamic json) {
     totalCount = json['total_count'];
@@ -27,91 +28,91 @@ class RepositoryListModel {
     }
     return map;
   }
-
 }
 
 class Items {
   Items({
-      this.id, 
-      this.nodeId, 
-      this.name, 
-      this.fullName, 
-      this.private, 
-      this.owner, 
-      this.htmlUrl, 
-      this.description, 
-      this.fork, 
-      this.url, 
-      this.forksUrl, 
-      this.keysUrl, 
-      this.collaboratorsUrl, 
-      this.teamsUrl, 
-      this.hooksUrl, 
-      this.issueEventsUrl, 
-      this.eventsUrl, 
-      this.assigneesUrl, 
-      this.branchesUrl, 
-      this.tagsUrl, 
-      this.blobsUrl, 
-      this.gitTagsUrl, 
-      this.gitRefsUrl, 
-      this.treesUrl, 
-      this.statusesUrl, 
-      this.languagesUrl, 
-      this.stargazersUrl, 
-      this.contributorsUrl, 
-      this.subscribersUrl, 
-      this.subscriptionUrl, 
-      this.commitsUrl, 
-      this.gitCommitsUrl, 
-      this.commentsUrl, 
-      this.issueCommentUrl, 
-      this.contentsUrl, 
-      this.compareUrl, 
-      this.mergesUrl, 
-      this.archiveUrl, 
-      this.downloadsUrl, 
-      this.issuesUrl, 
-      this.pullsUrl, 
-      this.milestonesUrl, 
-      this.notificationsUrl, 
-      this.labelsUrl, 
-      this.releasesUrl, 
-      this.deploymentsUrl, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.pushedAt, 
-      this.gitUrl, 
-      this.sshUrl, 
-      this.cloneUrl, 
-      this.svnUrl, 
-      this.homepage, 
-      this.size, 
-      this.stargazersCount, 
-      this.watchersCount, 
-      this.language, 
-      this.hasIssues, 
-      this.hasProjects, 
-      this.hasDownloads, 
-      this.hasWiki, 
-      this.hasPages, 
-      this.hasDiscussions, 
-      this.forksCount, 
-      this.mirrorUrl, 
-      this.archived, 
-      this.disabled, 
-      this.openIssuesCount, 
-      this.license, 
-      this.allowForking, 
-      this.isTemplate, 
-      this.webCommitSignoffRequired, 
-      this.topics, 
-      this.visibility, 
-      this.forks, 
-      this.openIssues, 
-      this.watchers, 
-      this.defaultBranch, 
-      this.score,});
+    this.id,
+    this.nodeId,
+    this.name,
+    this.fullName,
+    this.private,
+    this.owner,
+    this.htmlUrl,
+    this.description,
+    this.fork,
+    this.url,
+    this.forksUrl,
+    this.keysUrl,
+    this.collaboratorsUrl,
+    this.teamsUrl,
+    this.hooksUrl,
+    this.issueEventsUrl,
+    this.eventsUrl,
+    this.assigneesUrl,
+    this.branchesUrl,
+    this.tagsUrl,
+    this.blobsUrl,
+    this.gitTagsUrl,
+    this.gitRefsUrl,
+    this.treesUrl,
+    this.statusesUrl,
+    this.languagesUrl,
+    this.stargazersUrl,
+    this.contributorsUrl,
+    this.subscribersUrl,
+    this.subscriptionUrl,
+    this.commitsUrl,
+    this.gitCommitsUrl,
+    this.commentsUrl,
+    this.issueCommentUrl,
+    this.contentsUrl,
+    this.compareUrl,
+    this.mergesUrl,
+    this.archiveUrl,
+    this.downloadsUrl,
+    this.issuesUrl,
+    this.pullsUrl,
+    this.milestonesUrl,
+    this.notificationsUrl,
+    this.labelsUrl,
+    this.releasesUrl,
+    this.deploymentsUrl,
+    this.createdAt,
+    this.updatedAt,
+    this.pushedAt,
+    this.gitUrl,
+    this.sshUrl,
+    this.cloneUrl,
+    this.svnUrl,
+    this.homepage,
+    this.size,
+    this.stargazersCount,
+    this.watchersCount,
+    this.language,
+    this.hasIssues,
+    this.hasProjects,
+    this.hasDownloads,
+    this.hasWiki,
+    this.hasPages,
+    this.hasDiscussions,
+    this.forksCount,
+    this.mirrorUrl,
+    this.archived,
+    this.disabled,
+    this.openIssuesCount,
+    this.license,
+    this.allowForking,
+    this.isTemplate,
+    this.webCommitSignoffRequired,
+    this.topics,
+    this.visibility,
+    this.forks,
+    this.openIssues,
+    this.watchers,
+    this.defaultBranch,
+    this.score,
+  });
 
   Items.fromJson(dynamic json) {
     id = json['id'];
@@ -183,7 +184,8 @@ class Items {
     archived = json['archived'];
     disabled = json['disabled'];
     openIssuesCount = json['open_issues_count'];
-    license = json['license'] != null ? License.fromJson(json['license']) : null;
+    license =
+        json['license'] != null ? License.fromJson(json['license']) : null;
     allowForking = json['allow_forking'];
     isTemplate = json['is_template'];
     webCommitSignoffRequired = json['web_commit_signoff_required'];
@@ -364,16 +366,16 @@ class Items {
     map['score'] = score;
     return map;
   }
-
 }
 
 class License {
   License({
-      this.key, 
-      this.name, 
-      this.spdxId, 
-      this.url, 
-      this.nodeId,});
+    this.key,
+    this.name,
+    this.spdxId,
+    this.url,
+    this.nodeId,
+  });
 
   License.fromJson(dynamic json) {
     key = json['key'];
@@ -397,30 +399,30 @@ class License {
     map['node_id'] = nodeId;
     return map;
   }
-
 }
 
 class Owner {
   Owner({
-      this.login, 
-      this.id, 
-      this.nodeId, 
-      this.avatarUrl, 
-      this.gravatarId, 
-      this.url, 
-      this.htmlUrl, 
-      this.followersUrl, 
-      this.followingUrl, 
-      this.gistsUrl, 
-      this.starredUrl, 
-      this.subscriptionsUrl, 
-      this.organizationsUrl, 
-      this.reposUrl, 
-      this.eventsUrl, 
-      this.receivedEventsUrl, 
-      this.type, 
-      this.userViewType, 
-      this.siteAdmin,});
+    this.login,
+    this.id,
+    this.nodeId,
+    this.avatarUrl,
+    this.gravatarId,
+    this.url,
+    this.htmlUrl,
+    this.followersUrl,
+    this.followingUrl,
+    this.gistsUrl,
+    this.starredUrl,
+    this.subscriptionsUrl,
+    this.organizationsUrl,
+    this.reposUrl,
+    this.eventsUrl,
+    this.receivedEventsUrl,
+    this.type,
+    this.userViewType,
+    this.siteAdmin,
+  });
 
   Owner.fromJson(dynamic json) {
     login = json['login'];
@@ -486,5 +488,4 @@ class Owner {
     map['site_admin'] = siteAdmin;
     return map;
   }
-
 }

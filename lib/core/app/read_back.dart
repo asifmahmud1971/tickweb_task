@@ -32,9 +32,9 @@ class MainApp extends StatelessWidget {
       builder: (context, themeState) {
         return BlocConsumer<InternetCubit, InternetState>(
           listener: (context, internetState) {
-            if (internetState.status == NetworkState.disconnected) {
+            /*if (internetState.status == NetworkState.disconnected) {
               AppContext.to(const NoInternetScreen());
-            }
+            }*/
           },
           builder: (context, state) {
             return ScreenUtilInit(

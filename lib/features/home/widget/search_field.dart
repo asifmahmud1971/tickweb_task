@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatefulWidget {
@@ -62,7 +63,6 @@ class _SearchTextFieldState extends State<SearchTextField> {
             ? const Color(0xFF1E1E1E)
             : Colors.grey.shade100,
         borderRadius: BorderRadius.circular(30),
-
       ),
       child: TextField(
         controller: _controller,

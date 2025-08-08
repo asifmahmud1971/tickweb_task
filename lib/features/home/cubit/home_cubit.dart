@@ -24,31 +24,30 @@ class HomeCubit extends Cubit<HomeState> {
   int page = 1;
   String? message;
   final _appPreferences = instance.get<AppPreferences>();
-
   Future<void> getRepoList({
     String? sort,
     int? perPage,
     String? text,
     bool isSearch = false,
-    bool isLoader = true
+    bool isLoader = true,
   }) async {
     if (isLoader) {
       showProgressDialog();
     }
 
     try {
-      // Handle refresh case
+      // Handle refresh
       if (page == 1 || refreshController.isRefresh || isSearch) {
         page = 1;
         emit(state.copyWith(
           status: HomeStatus.loading,
-          repoList: [], // Clear existing list on refresh
-          repositoryListModel: null, // Reset model
+          repoList: [],
+          repositoryListModel: null,
           hasReachedMax: false,
         ));
       }
 
-      // Check if we've reached the maximum
+      // Check max limit
       if (state.hasReachedMax) {
         refreshController.loadNoData();
         return;
@@ -57,33 +56,48 @@ class HomeCubit extends Cubit<HomeState> {
       // Make API call
       final response = await homeRepository.getRepoList({
         "page": page,
-        "sort": sort ?? "star", // Use provided sort or default
+        "sort": sort ?? "star",
         "per_page": perPage ?? 10,
-        "q": searchController.text.isNotEmpty?searchController.text:"flutter"
+        "q": searchController.text.isNotEmpty
+            ? searchController.text
+            : "flutter",
       });
 
       response.fold(
-            (failure) {
-          emit(state.copyWith(
-            status: HomeStatus.failure,
-            message: failure.message,
-          ));
+        // On failure → load from cache
+        (failure) async {
+          log("API Failed: ${failure.message}");
+          final cachedList = await _appPreferences.getRepoList();
+          if ((cachedList ?? []).isNotEmpty) {
+            emit(state.copyWith(
+              status: HomeStatus.success,
+              repoList: cachedList,
+              repositoryListModel: RepositoryListModel(items: cachedList),
+              hasReachedMax: true,
+            ));
+          } else {
+            emit(state.copyWith(
+              status: HomeStatus.failure,
+              message: failure.message,
+            ));
+          }
           refreshController.refreshFailed();
           refreshController.loadFailed();
           dismissProgressDialog();
         },
-            (data) {
+
+        // On success → save to cache
+        (data) async {
           final newItems = data.items ?? [];
           final currentItems = state.repoList;
 
-          // Combine old and new items
           List<Items> combinedItems = [
             ...(page == 1 ? [] : currentItems),
             ...newItems
           ];
 
-          // Determine if we've reached the end
-          final hasReachedMax = newItems.isEmpty || newItems.length < (perPage ?? 10);
+          final hasReachedMax =
+              newItems.isEmpty || newItems.length < (perPage ?? 10);
 
           emit(state.copyWith(
             status: HomeStatus.success,
@@ -91,13 +105,14 @@ class HomeCubit extends Cubit<HomeState> {
             repositoryListModel: RepositoryListModel(items: combinedItems),
             hasReachedMax: hasReachedMax,
           ));
-          _appPreferences.saveRepoList(combinedItems);
-          // Update page only if we got new items
+
+          // ✅ Save new list to cache
+          await _appPreferences.saveRepoList(combinedItems);
+
           if (newItems.isNotEmpty) {
             page++;
           }
 
-          // Handle refresh controller states
           if (refreshController.isRefresh) {
             refreshController.refreshCompleted();
           } else {
@@ -111,10 +126,22 @@ class HomeCubit extends Cubit<HomeState> {
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: HomeStatus.failure,
-        message: e.toString(),
-      ));
+      log("Error: $e");
+      final cachedList = await _appPreferences.getRepoList();
+
+      if ((cachedList ?? []).isNotEmpty) {
+        emit(state.copyWith(
+          status: HomeStatus.success,
+          repoList: cachedList,
+          repositoryListModel: RepositoryListModel(items: cachedList),
+          hasReachedMax: true,
+        ));
+      } else {
+        emit(state.copyWith(
+          status: HomeStatus.failure,
+          message: e.toString(),
+        ));
+      }
       refreshController.refreshFailed();
       refreshController.loadFailed();
       dismissProgressDialog();
